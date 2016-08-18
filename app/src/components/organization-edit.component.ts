@@ -48,7 +48,6 @@ export class OrganizationEditComponent {
 
     public saveOrganization(org) {
         if (org._id != null) {
-            console.log('existing...', org, org._id);
             this.http.put('/api/organizations/' + org._id, org)
                 .map((res: Response) => {
                     return res.json();
@@ -56,7 +55,6 @@ export class OrganizationEditComponent {
                 .subscribe(organization => this.organization = organization,
                 error => this.errorMessage = <any>error);
         } else {
-            console.log('new...', org, org._id);
             this.http.post('/api/organizations', org)
                 .map((res: Response) => {
                     return res.json();

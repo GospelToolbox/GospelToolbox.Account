@@ -6,13 +6,13 @@ var AuthCode = require('../models/authCode');
 
 var server = oauth2orize.createServer();
 
-server.serializeClient(function(client, callback) {
+server.serializeClient(function (client, callback) {
     return callback(null, client._id);
 });
 
-server.deserializeClient(function(id, callback) {
-    Client.findOne({ _id: id }, function(err, client) {
-        if(err) {
+server.deserializeClient(function (id, callback) {
+    Client.findOne({ _id: id }, function (err, client) {
+        if (err) {
             return callback(err);
         }
 
@@ -29,8 +29,8 @@ server.grant(oauth2orize.grant.code(function(client, redirectUri, user, ares, ca
         userId: user._id
     });
 
-    code.save(function(err) {
-        if(err) {
+    code.save(function (err) {
+        if (err) {
             return callback(err);
         }
 
@@ -38,30 +38,30 @@ server.grant(oauth2orize.grant.code(function(client, redirectUri, user, ares, ca
     });
 }));
 
-server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, callback) {
-    AuthCode.findOne({value: code}, function(err, authCode) {
-        if(err) { 
+server.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, callback) {
+    AuthCode.findOne({ value: code }, function (err, authCode) {
+        if (err) {
             return callback(err);
         }
 
         // Invalid auth code
-        if(!authCode) {
+        if (!authCode) {
             return callback(null, false);
         }
 
         // This is not an auth code for the current client
-        if(client._id.toString() !== authCode.clientId) {
+        if (client._id.toString() !== authCode.clientId) {
             return callback(null, false);
         }
 
         // Requested redirect doesn't match
-        if(redirectUri !== authCode.redirectUri) {
+        if (redirectUri !== authCode.redirectUri) {
             return callback(null, false);
         }
 
         // Delete the auth code after user
-        authCode.remove(function(err) {
-            if(err) { 
+        authCode.remove(function (err) {
+            if (err) {
                 return callback(err);
             }
 
@@ -72,8 +72,8 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
                 userId: authCode.userId
             });
 
-            token.save(function(err) {
-                if(err) {
+            token.save(function (err) {
+                if (err) {
                     return callback(err);
                 }
 
@@ -85,18 +85,16 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
 
 // Authorization endpoint
 exports.authorization = [
-    server.authorization(function(clientId, redirectUri, callback) {
-        console.log('test1');
-        Client.findOne({id: clientId}, function(err, client) {
-            if(err) {
+    server.authorization(function (clientId, redirectUri, callback) {
+        Client.findOne({ id: clientId }, function (err, client) {
+            if (err) {
                 return callback(err);
             }
 
             return callback(null, client, redirectUri);
         });
     }),
-    function(req, res) {
-        console.log('test2');
+    function (req, res) {
         res.render('dialog', {
             transactionID: req.oauth2.transactionID,
             user: req.user,
@@ -118,18 +116,18 @@ exports.token = [
 
 //-----------------------------------------------------------------------------
 
-function uid (len) {
-  var buf = []
-    , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    , charlen = chars.length;
+function uid(len) {
+    var buf = []
+        , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        , charlen = chars.length;
 
-  for (var i = 0; i < len; ++i) {
-    buf.push(chars[getRandomInt(0, charlen - 1)]);
-  }
+    for (var i = 0; i < len; ++i) {
+        buf.push(chars[getRandomInt(0, charlen - 1)]);
+    }
 
-  return buf.join('');
+    return buf.join('');
 };
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

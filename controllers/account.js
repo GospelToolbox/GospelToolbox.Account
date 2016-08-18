@@ -9,13 +9,13 @@ exports.postAccounts = function (req, res) {
     // Set the model data from the POST data
     account.firstName = req.body.firstName;
     account.lastName = req.body.lastName;
-    account.username = req.body.username;
+    account.email = req.body.email;
     account.password = req.body.password;
 
 
     account.save(function (err) {
         if (err) {
-            res.send(err);
+            return res.send(err);
         }
 
         res.json({ message: 'Account added!', data: account });

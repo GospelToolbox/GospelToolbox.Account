@@ -69,7 +69,7 @@ apiRouter.route('/organizations/:organization_id')
     .delete(authController.isAuthenticated, organizationController.deleteOrganization);
 
 apiRouter.route('/clients')
-    .post(authController.isAuthenticated, authController.isAuthenticated, clientController.postClients)
+    .post(authController.isAuthenticated, clientController.postClients)
     .get(authController.isAuthenticated, clientController.getClients);
 
 app.use('/api', apiRouter);
@@ -77,8 +77,8 @@ app.use('/api', apiRouter);
 var authRouter = express.Router();
 
 authRouter.route('/authorize')
-    .get(authController.isAuthenticated, oauth2Controller.authorization)
-    .post(authController.isAuthenticated, oauth2Controller.decision);
+    .get(authController.isAppAuthenticated, oauth2Controller.authorization)
+    .post(authController.isAppAuthenticated, oauth2Controller.decision);
 
 authRouter.route('/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
@@ -86,11 +86,17 @@ authRouter.route('/token')
 app.use('/auth', authRouter);
 
 app.get('/login', appController.login);
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
+app.post('/login', function (req, res, next) {
+    return passport.authenticate('local', {
+        successRedirect: req.query['redirectTo'] ? req.query['redirectTo'] : '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+
+});
+
+
+//  ));
 
 app.use(errorHandler());
 

@@ -15,7 +15,7 @@ var AccessToken = require('../models/accessToken');
  */
 passport.use(new LocalStrategy(
     function (username, password, callback) {
-        Account.findOne({ username: username }, function (err, account) {
+        Account.findOne({ email: username }, function (err, account) {
             if (err) {
                 return callback(err);
             }
@@ -44,7 +44,7 @@ exports.isAppAuthenticated = function (req, res, next) {
         return next();
     }
     else {
-        res.redirect('/login');
+        res.redirect('/login?redirectTo=' + encodeURIComponent(req.originalUrl));
     }
 }
 
@@ -53,7 +53,7 @@ exports.isAppAuthenticated = function (req, res, next) {
  */
 passport.use(new BasicStrategy(
     function (username, password, callback) {
-        Account.findOne({ username: username }, function (err, account) {
+        Account.findOne({ email: username }, function (err, account) {
             if (err) {
                 return callback(err);
             }
@@ -78,13 +78,10 @@ passport.use(new BasicStrategy(
 ));
 
 exports.isAuthenticated = function (req, res, next) {
-    console.log('Checking authentication...');
     if (req.isAuthenticated()) {
-        console.log('Already authenticated by cookie');
         return next();
     }
     else {
-        console.log('Not authenticated by cookie');
         return passport.authenticate(['basic', 'bearer'], { session: false })(req, res, next);
     }
 }
@@ -144,7 +141,6 @@ exports.isBearerAuthenticated = passport.authenticate('bearer', { session: false
 //====================================================================================
 
 passport.serializeUser(function (user, callback) {
-    console.log('serializez', user);
     return callback(null, user._id);
 });
 
@@ -161,7 +157,6 @@ passport.deserializeUser(function (id, callback) {
             return callback(null, false);
         }
 
-        console.log('deserialize', account);
         return callback(null, account);
     });
 });
