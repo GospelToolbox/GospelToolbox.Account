@@ -1,0 +1,54 @@
+<style>
+
+</style>
+<div class="container" *ngIf="account">
+    <h1>Profile</h1>
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#changePassword" role="tab">Change Password</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <div class="tab-content">
+                <div class="tab-pane active" id="profile" role="tabpanel">
+                    <div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <div style="font-weight: bold;">{{account?.username}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input class="form-control" type="text" [(ngModel)]="account.firstName">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" type="text" [(ngModel)]="account.lastName">
+                        </div>
+                        <button class="btn btn-primary" (click)="saveProfile()">Save</button>
+                    </div>
+                </div>
+                <div class="tab-pane" id="changePassword" role="tabpanel">
+                    <div class="form-group">
+                        <label>Current Password:</label>
+                        <input class="form-control" type="password" [(ngModel)]="currentPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password:</label>
+                        <input class="form-control" type="password" [(ngModel)]="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password Again:</label>
+                        <input class="form-control" type="password" [(ngModel)]="newPasswordAgain">
+                    </div>
+                    <button class="btn btn-primary" (click)="changePassword()">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

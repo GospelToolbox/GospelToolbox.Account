@@ -1,0 +1,47 @@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="padding: 1em;">
+                <h2>Hi, {{ account?.firstName }} </h2>
+                <p class="lead">
+                    This is where you can manage your profile in Gospel Toolbox, as well as create and manage organizations.
+                </p>
+                <hr />
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <h3>My Profile
+                    <button class="btn btn-link pull-xs-right" routerLink="/profile">
+                    <i class="fa fa-pencil"></i>
+                    Update Profile
+                </button>
+                </h3>
+                <div class="card card-block">
+                    <dl>
+                        <dt>Username</dt>
+                        <dd>{{ account?.username }}</dd>
+
+                        <dt>First Name</dt>
+                        <dd>{{ account?.firstName }}</dd>
+
+                        <dt>Last Name</dt>
+                        <dd>{{ account?.lastName }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <h3>My Organizations
+                    <button class="btn btn-link pull-xs-right" routerLink="/organizations/new">
+                    <i class="fa fa-plus"></i>
+                    Create New Organization
+                </button>
+                </h3>
+                <div class="card  card-block">
+                    <ul>
+                        <li *ngFor="let organization of organizations">
+                            <a [routerLink]="['/organizations', organization._id]">{{ organization.name }}</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
