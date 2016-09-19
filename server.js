@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan'); // express-logger
 var errorHandler = require('errorhandler');
 var flash = require('connect-flash');
+var cors = require('cors');
 
 // Import controllers
 var accountController = require('./controllers/account');
@@ -20,6 +21,18 @@ var appController = require('./controllers/app');
 var app = express();
 
 app.set('view engine', 'ejs');
+
+var whitelist = ['http://people.gospeltoolbox.net:3001'];
+var corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+        console.log(`!!!${origin}`, whitelist);
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        console.log('originisWhitelisted:', originIsWhitelisted);
+        callback(null, originIsWhitelisted);
+    }
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -83,6 +96,17 @@ authRouter.route('/authorize')
 authRouter.route('/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
 
+authRouter.route('/userinfo')
+    .get(authController.isAuthenticated, function (req, res) {
+        return res.json({
+            sub: req.user._id,
+            email: req.user.username,
+            name: req.user.firstName + ' ' + req.user.lastName,
+            given_name: req.user.firstName,
+            family_name: req.user.lastName
+        });
+    });
+
 app.use('/auth', authRouter);
 
 app.get('/login', appController.login);
@@ -93,6 +117,12 @@ app.post('/login', function (req, res, next) {
         failureFlash: true
     })(req, res, next);
 
+});
+
+app.get('/logout', function(req, res, next)  {
+    req.logout();
+    var redirectUrl = req.query['redirectTo'] || '/';
+    res.redirect(redirectUrl);
 });
 
 

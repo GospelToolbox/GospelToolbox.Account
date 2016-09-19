@@ -91,6 +91,7 @@ exports.isAuthenticated = function (req, res, next) {
  */
 passport.use('client-basic', new BasicStrategy(
     function (username, password, callback) {
+        console.log('Client Login: ', [username, password]);
         Client.findOne({ id: username }, function (err, client) {
             if (err) {
                 return callback(err);
@@ -112,7 +113,7 @@ exports.isClientAuthenticated = passport.authenticate('client-basic', { session:
  */
 passport.use(new BearerStrategy(
     function (accessToken, callback) {
-        Token.findOne({ value: accessToken }, function (err, token) {
+        AccessToken.findOne({ value: accessToken }, function (err, token) {
             if (err) {
                 return callback(err);
             }
@@ -121,7 +122,7 @@ passport.use(new BearerStrategy(
                 return callback(null, false);
             }
 
-            User.findOne({ _id: token.userId }, function (err, user) {
+            Account.findOne({ _id: token.userId }, function (err, user) {
                 if (err) {
                     return callback(err);
                 }

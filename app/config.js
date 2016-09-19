@@ -16,6 +16,7 @@ System.config({
     "@angular/platform-browser": "npm:@angular/platform-browser@2.0.0-rc.5",
     "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@2.0.0-rc.5",
     "@angular/router": "npm:@angular/router@3.0.0-rc.1",
+    "@gospeltoolbox/core": "npm:@gospeltoolbox/core@1.0.0",
     "@ng-bootstrap/ng-bootstrap": "npm:@ng-bootstrap/ng-bootstrap@1.0.0-alpha.2",
     "angular2": "npm:angular2@2.0.0-beta.17",
     "crypto": "github:jspm/nodelibs-crypto@0.1.0",
@@ -112,6 +113,16 @@ System.config({
       "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@2.0.0-rc.5",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "rxjs": "npm:rxjs@5.0.0-beta.6"
+    },
+    "npm:@gospeltoolbox/core@1.0.0": {
+      "@angular/common": "npm:@angular/common@2.0.0-rc.5",
+      "@angular/compiler": "npm:@angular/compiler@2.0.0-rc.5",
+      "@angular/core": "npm:@angular/core@2.0.0-rc.5",
+      "@angular/http": "npm:@angular/http@2.0.0-rc.5",
+      "crypto": "github:jspm/nodelibs-crypto@0.1.0",
+      "reflect-metadata": "npm:reflect-metadata@0.1.8",
+      "rxjs": "npm:rxjs@5.0.0-beta.6",
+      "zone.js": "npm:zone.js@0.6.13"
     },
     "npm:@ng-bootstrap/ng-bootstrap@1.0.0-alpha.2": {
       "@angular/common": "npm:@angular/common@2.0.0-rc.5",

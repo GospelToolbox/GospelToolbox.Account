@@ -7,6 +7,9 @@ System.config({
   packages: {
     "src": {
       "defaultExtension": "ts"
+    },
+    "@gospeltoolbox/core": {
+      "defaultExtension": "ts"
     }
   }
 });

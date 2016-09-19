@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Subscription } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { OrganizationService } from '@gospeltoolbox/core';
 
 import { Http, Response } from '@angular/http';
 //import 'rxjs/Rx';
@@ -19,7 +21,8 @@ export class OrganizationEditComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private http: Http
+        private http: Http,
+        private organizationService: OrganizationService
     ) { }
 
     ngOnInit() {
@@ -28,16 +31,9 @@ export class OrganizationEditComponent {
             let id = params['organization_id'];
 
             if (id) {
-                this.http.get('/api/organizations/' + id)
-                    .map((res: Response) => {
-                        return res.json();
-                    })
-                    .subscribe(
-                    organization => this.organization = organization,
-                    error => this.errorMessage = <any>error);
+                this.getOrganization(id);
             } else {
-                this.organization = {
-                };
+                this.organization = { };
             }
         });
     }
@@ -46,21 +42,21 @@ export class OrganizationEditComponent {
         this.sub.unsubscribe();
     }
 
+    public getOrganization(id: string) {
+        this.organizationService.getOrganization(id)
+            .then(org => this.organization = org)
+            .catch(err => this.errorMessage = err.message || err);
+    }
+
     public saveOrganization(org) {
         if (org._id != null) {
-            this.http.put('/api/organizations/' + org._id, org)
-                .map((res: Response) => {
-                    return res.json();
-                })
-                .subscribe(organization => this.organization = organization,
-                error => this.errorMessage = <any>error);
+            this.organizationService.saveOrganization(org)
+                .then(org => this.organization = org)
+                .catch(err => this.errorMessage = err.message || err);
         } else {
-            this.http.post('/api/organizations', org)
-                .map((res: Response) => {
-                    return res.json();
-                })
-                .subscribe(organization => this.router.navigate(['/organizations', organization.data._id]),
-                error => this.errorMessage = <any>error);
+            this.organizationService.saveOrganization(org)
+                .then(org => this.router.navigate(['/organizations', org.data._id]))
+                .catch(err => this.errorMessage = err.message || err);
         }
     }
 }
