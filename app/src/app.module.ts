@@ -15,7 +15,6 @@ import { AccountProfileComponent }    from './components/profile.component';
 import { OrganizationListComponent }  from './components/organization-list.component';
 import { OrganizationEditComponent }  from './components/organization-edit.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +29,8 @@ import { OrganizationEditComponent }  from './components/organization-edit.compo
     AccountAppComponent,
     AccountHomeComponent,
     AccountProfileComponent,
-    OrganizationListComponent
+    OrganizationListComponent,
+    OrganizationEditComponent
   ],
   providers: [
     appRoutingProviders
