@@ -15,6 +15,8 @@ import { AccountProfileComponent }    from './components/profile.component';
 import { OrganizationListComponent }  from './components/organization-list.component';
 import { OrganizationEditComponent }  from './components/organization-edit.component';
 
+import { UsernameComponent } from './components/username.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { OrganizationEditComponent }  from './components/organization-edit.compo
     AccountHomeComponent,
     AccountProfileComponent,
     OrganizationListComponent,
-    OrganizationEditComponent
+    OrganizationEditComponent,
+    UsernameComponent
   ],
   providers: [
     appRoutingProviders

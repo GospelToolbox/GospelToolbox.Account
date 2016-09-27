@@ -8,10 +8,23 @@
         </li>
     </ul>
 
+
     <ul class="nav navbar-nav pull-right">
-        <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdownMenuLink" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i>
+            <gtbox-username></gtbox-username>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/logout">
+                <i class="fa fa-sign-up"></i>
+                Logout
+                </a>
+            </div>
         </li>
+
     </ul>
 </gtbox-navbar>
 
