@@ -8,7 +8,7 @@ end
 gem 'devise'
 gem 'omniauth'
 gem 'bcrypt', '3.1.11', platforms: [:ruby]
-
+gem 'doorkeeper'
 
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
