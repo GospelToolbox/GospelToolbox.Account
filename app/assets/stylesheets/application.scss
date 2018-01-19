@@ -12,4 +12,38 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+@import "bootstrap/scss/bootstrap";
+@import "mdbootstrap/css/mdb";
+body.application {
+  padding-top: 5rem;
+}
+
+body.no-nav {
+  background-color: #01579b;
+}
+
+.bg-dark {
+  background-color: #01579b !important;
+}
+
+.navbar .dropdown-menu a:hover {
+  color: #000 !important;
+}
+
+.btn.btn-facebook {
+  background-color: #3b5998;
+  color: #fff !important;
+}
+
+.btn.btn-twitter {
+  background-color: #55acee;
+  color: #fff !important;
+}
+
+.btn.btn-google {
+  background-color: #dd4b39;
+  color: #fff !important;
+}
