@@ -1,7 +1,7 @@
 import React from 'react';  
 import { Link } from 'react-router-dom';  
 import axios from 'axios';
-import Organizations from './Organizations';
+import UserMemberships from './UserMemberships';
 
 class ProfileDisplay extends React.Component {  
   constructor () {
@@ -39,7 +39,7 @@ class ProfileDisplay extends React.Component {
         </div>
 
         <h2>Organizations</h2>
-        <Organizations></Organizations>
+        <UserMemberships userId={this.state.profile.id}></UserMemberships>
 
       </div>
     );
