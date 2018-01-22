@@ -10,13 +10,17 @@
     "graphql.js": "^0.4.20",
     "jquery": "3",
     "mdbootstrap": "^4.4.4",
+    "node-sass": "^4.7.2",
     "popper.js": "1.12.9",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react_ujs": "^2.4.3"
+    "react_ujs": "^2.4.3",
+    "reactstrap": "^5.0.0-alpha.4",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.10.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.11.0"

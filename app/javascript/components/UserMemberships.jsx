@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import graph from 'graphql.js'
 
+import { Button } from 'reactstrap';
+
 class UserMemberships extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +69,7 @@ class UserMemberships extends React.Component {
         <tbody>
           {this.state.memberships.map((membership, ndx) => (
             <tr key={ndx}>
-              <td>
+              <td className="font-weight-bold">
                 {membership.organization.name}
               </td>
               <td>
@@ -75,10 +77,15 @@ class UserMemberships extends React.Component {
               </td>
               <td>
                 { membership.role === 'admin' &&
-                <a className="btn btn-sm btn-primary">Manage</a>
+                <Button color="primary" size="sm">
+                <i className="fa fa-gears mr-1"></i>
+                Manage
+                </Button>
                 }
-                
-                <a className="btn btn-sm btn-danger">Leave</a>
+                <Button color="danger" size="sm">
+                <i className="fa fa-sign-out mr-1"></i>
+                Leave Organization
+                </Button>
                 </td>
             </tr>
           ))}
