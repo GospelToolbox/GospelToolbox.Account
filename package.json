@@ -8,6 +8,7 @@
     "bootstrap": "4.0.0",
     "coffeescript": "1.12.7",
     "graphql.js": "^0.4.20",
+    "immutability-helper": "^2.6.4",
     "jquery": "3",
     "mdbootstrap": "^4.4.4",
     "node-sass": "^4.7.2",

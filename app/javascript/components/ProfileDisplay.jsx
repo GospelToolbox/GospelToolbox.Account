@@ -16,16 +16,15 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
+import ProfileForm from './ProfileForm/ProfileForm';
 import './ProfileDisplay';
 import UserMemberships from './UserMemberships';
 
 class ProfileDisplay extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      profile: {},
-      activeTab: 'profile'
-    };
+  state = {
+    profile: {},
+    activeTab: 'profile',
+    saving: false
   }
 
   fetchProfile() {
@@ -54,67 +53,52 @@ class ProfileDisplay extends React.Component {
     this.fetchProfile();
   }
 
+  handleSaveProfile = (model) => {
+    this.setState({saving: true});
+    axios.put(`api/v1/users/${model.id}`, model)
+      .then(() => this.fetchProfile)
+      .finally(() => this.setState({saving: false}));
+  }
+
   render() {
+    const {
+      activeTab,
+      profile,
+      saving
+    } = this.state;
     return (
       <div className="container">
         <Nav tabs className="mb-3">
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === 'profile' })}
-              onClick={() => { this.toggle('profile'); }}
-            >
+              className={classnames({ active: activeTab === 'profile' })}
+              onClick={() => this.toggle('profile')}>
               Profile
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === 'organizations' })}
-              onClick={() => { this.toggle('organizations'); }}
-            >
+              className={classnames({ active: activeTab === 'organizations' })}
+              onClick={() => this.toggle('organizations')}>
               Organizations
             </NavLink>
           </NavItem>
         </Nav>
 
-        <TabContent activeTab={this.state.activeTab}>
+        <TabContent activeTab={activeTab}>
           <TabPane tabId="profile">
             <Row>
               <Col sm="12">
-                <h1>Welcome, {this.state.profile.email}!</h1>
+                <h1>Welcome, {profile.email}!</h1>
                 <p>You're signed in and ready to use some apps.</p>
               </Col>
             </Row>
-            {this.state.profile &&
-              <section>
+            {profile &&
                 <Row>
                   <Col>
-                    <div className="md-form">
-                      <input className="form-control" name="email" type="email"
-                        value={this.state.profile.email} />
-                      <label className={'active'} htmlFor="email">Email</label>
-                    </div>
+                    <ProfileForm model={profile} saving={saving} onSave={this.handleSaveProfile}></ProfileForm>
                   </Col>
                 </Row>
-                <Row>
-                  <Col sm="12" md="6">
-                    <div className="md-form">
-                      <input className="form-control" name="firstName" type="text" />
-                      <label htmlFor="firstName">First Name</label>
-                    </div>
-                  </Col>
-                  <Col sm="12" md="6">
-                    <div className="md-form">
-                      <input className="form-control" name="lastName" type="text" />
-                      <label htmlFor="lastName">Last Name</label>
-                    </div>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Button color="primary">Save</Button>
-                  </Col>
-                </Row>
-              </section>
             }
           </TabPane>
           <TabPane tabId="organizations">
@@ -124,7 +108,7 @@ class ProfileDisplay extends React.Component {
                 <i className="fa fa-plus mr-1"></i>
                 Create New Organization
                 </Button>
-                <UserMemberships userId={this.state.profile.id}></UserMemberships>
+                <UserMemberships userId={profile.id}></UserMemberships>
               </Col>
             </Row>
           </TabPane>
