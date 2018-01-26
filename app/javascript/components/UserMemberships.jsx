@@ -1,64 +1,23 @@
 import React from 'react'
 import axios from 'axios'
 import graph from 'graphql.js'
-
+import {
+  Link
+} from 'react-router-dom'
 import { Button } from 'reactstrap';
 
-class UserMemberships extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      memberships: []
-    };
-
-    this.graph = graph('/graphql', {
-      headers: {
-        'X-CSRF-Token': $("meta[name=csrf-token]").attr("content"),
-      }
-    });
-
+export default class UserMemberships extends React.Component {
+  state = {
+    user: null
   }
-
-  fetchMemberships(userId) {
-    let fetchPromise;
-    
-    if (userId != null) {
-      fetchPromise = this.graph(`
-      {
-        user(id: ${userId}) {
-          memberships {
-            role,
-            organization {
-              name
-            }
-          }
-        }
-      }
-      `)()
-      .then(res => res.user.memberships);
-    } else {
-      fetchPromise = Promise.resolve([]);
-    }
-
-    fetchPromise.then(memberships => {
-      this.setState({ memberships });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
-
-  componentDidMount() {
-    this.fetchMemberships(this.props.userId);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.fetchMemberships(nextProps.userId);
-  }
-
   render() {
+    const {
+      user
+    } = this.props;
+
     return (
-      <table className="table">
+      <div>
+      { user && user.memberships && <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -67,7 +26,7 @@ class UserMemberships extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.memberships.map((membership, ndx) => (
+          {user.memberships.map((membership, ndx) => (
             <tr key={ndx}>
               <td className="font-weight-bold">
                 {membership.organization.name}
@@ -77,10 +36,10 @@ class UserMemberships extends React.Component {
               </td>
               <td>
                 { membership.role === 'admin' &&
-                <Button color="primary" size="sm">
-                <i className="fa fa-gears mr-1"></i>
-                Manage
-                </Button>
+                  <Link className="btn btn-sm btn-primary" to={`/organizations/${membership.organization.id}`}>
+                    <i className="fa fa-gears mr-1"></i>
+                    Manage
+                  </Link>
                 }
                 <Button color="danger" size="sm">
                 <i className="fa fa-sign-out mr-1"></i>
@@ -91,8 +50,8 @@ class UserMemberships extends React.Component {
           ))}
         </tbody>
       </table>
+    }
+    </div>
     );
   }
 }
-
-export default UserMemberships;

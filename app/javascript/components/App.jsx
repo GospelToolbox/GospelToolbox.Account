@@ -1,17 +1,33 @@
 import React from 'react'  
 import {  
-  BrowserRouter as Router,
-  Route
+  HashRouter as Router,
+  Route,
+  NavLink
 } from 'react-router-dom'
-import ProfileDisplay from './ProfileDisplay'
+import ProfileView from './ProfileView'
+import OrganizationsView from './OrganizationsView'
 
 const App = (props) => (  
   
   <Router>
-    <div>
+    <div className="container">
+      <ul className="nav nav-tabs mb-3">
+        <li className="nav-item">
+          <NavLink exact className="nav-link" to="/">Profile</NavLink>
+        </li>
+        <li className="nav-item">
+        <NavLink className="nav-link" to="/organizations" >Organizations</NavLink>
+        </li>
+      </ul>
+
       <Route
+        exact
         path='/'
-        component={ProfileDisplay}
+        component={ProfileView}
+      />
+      <Route
+        path='/organizations'
+        component={OrganizationsView}
       />
     </div>
   </Router>
