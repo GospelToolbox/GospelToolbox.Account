@@ -25,9 +25,9 @@ class Api::V1::OrganizationsController < ApiController
 
   def destroy
     org = Organization.find(params[:id])
+    org.invitations.destroy_all
+    org.memberships.destroy_all
     org.destroy
-
-    Membership.where(organization_id: params[:id]).destroy_all
 
     render json: {}, status: :no_content
   end

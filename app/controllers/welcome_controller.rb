@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 
     invitation.destroy
 
-    redirect_to welcome_index_url
+    redirect_to root
 
   end
 end

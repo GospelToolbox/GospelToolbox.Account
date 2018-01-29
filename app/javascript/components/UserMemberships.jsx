@@ -41,10 +41,10 @@ export default class UserMemberships extends React.Component {
                     Manage
                   </Link>
                 }
-                <Button color="danger" size="sm">
+                <button type="button" className="btn btn-sm btn-outline-danger">
                 <i className="fa fa-sign-out mr-1"></i>
                 Leave Organization
-                </Button>
+                </button>
                 </td>
             </tr>
           ))}
