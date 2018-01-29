@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122012537) do
+ActiveRecord::Schema.define(version: 20180128004026) do
 
   create_table "authentication_providers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_name_on_authentication_providers"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.string "token"
+    t.integer "organization_id"
+    t.string "role"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_invitations_on_organization_id"
+    t.index ["token"], name: "index_invitations_on_token"
   end
 
   create_table "memberships", force: :cascade do |t|

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   use_doorkeeper
   get 'welcome/index'
 
+  devise_scope :user do
+    get '/invitation', to: "welcome#accept_invitation"
+  end
+  
+
   devise_for :users, controllers: { 
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -16,7 +21,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users
-      resources :organizations
+      resources :organizations do 
+        post 'invite', on: :member
+      end
 
       resource :profile, only: :show
     end

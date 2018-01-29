@@ -82,11 +82,20 @@ export default class ProfileForm extends React.Component {
         <Row>
           <Col sm="12" md="6">
             <div className="md-form">
-              <input className="form-control" name="first_name" type="text"
+              <input 
+                className="form-control" 
+                name="first_name" 
+                type="text"
                 value={model.first_name || ""}
-                onChange={this.handleInputChanged} />
-              <label htmlFor="first_name"
-                className={this.labelClass(model.first_name)}>First Name</label>
+                onChange={this.handleInputChanged}
+              />
+              <label 
+                htmlFor="first_name"
+                className={this.labelClass(model.first_name)}
+              >
+                First Name
+              </label>
+
             </div>
           </Col>
           <Col sm="12" md="6">
@@ -103,6 +112,10 @@ export default class ProfileForm extends React.Component {
             <Button color="primary" disabled={saving} onClick={this.handleSave}>
               {saving ? <span><i className="fa fa-spin fa-spinner mr-1"></i> Saving...</span> : 'Save'}
             </Button>
+            <br />
+            <a  href="/users/edit">
+              Change email, password, or cancel account
+            </a>
           </Col>
         </Row>
       </div>

@@ -35,7 +35,7 @@ export default class UserMemberships extends React.Component {
                 {membership.role}
               </td>
               <td>
-                { membership.role === 'admin' &&
+                { (membership.role === 'Administrator' || membership.role === 'admin') &&
                   <Link className="btn btn-sm btn-primary" to={`/organizations/${membership.organization.id}`}>
                     <i className="fa fa-gears mr-1"></i>
                     Manage

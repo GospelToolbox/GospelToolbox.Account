@@ -5,7 +5,7 @@ import {
   Col,
 } from 'reactstrap';
 
-import ProfileForm from './ProfileForm/ProfileForm';
+import ProfileForm from './ProfileForm';
 
 export default class ProfileView extends React.Component {
   state = {
@@ -34,7 +34,7 @@ export default class ProfileView extends React.Component {
   handleSaveProfile = (model) => {
     this.setState({ saving: true });
     axios.put(`api/v1/users/${model.id}`, model)
-      .then(() => this.fetchProfile)
+      .then(() => this.fetchProfile())
       .finally(() => this.setState({ saving: false }));
   }
 

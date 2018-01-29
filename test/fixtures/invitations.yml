@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  token: 
+  organization: one
+  role: MyString
+  email: MyString
+
+two:
+  token: 
+  organization: two
+  role: MyString
+  email: MyString

@@ -1,0 +1,14 @@
+<p>You have been invited to join
+  <strong>
+    <%= @organization.name %>
+  </strong> at Gospel Toolbox.</p>
+<p>
+  To accept this invitation, please open this link in your browser to create a Gospel Toolbox account or link your existing
+  account to
+  <strong>
+    <%= @organization.name %>
+  </strong>:
+</p>
+<p>
+  <%= link_to @organization.name, invitation_url + "?token=#{@invitation.token}" %>
+</p>

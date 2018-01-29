@@ -8,11 +8,13 @@ import {
 } from 'reactstrap';
 import {
   Route,
-  NavLink
+  Switch,
+  Link
 } from 'react-router-dom'
 
 import UserMemberships from './UserMemberships';
 import ManageOrganizationView from './ManageOrganizationView';
+import CreateOrganizationView from './CreateOrganizationView';
 
 export default class OrganizationsView extends React.Component {
   state = {
@@ -33,7 +35,7 @@ export default class OrganizationsView extends React.Component {
   fetchProfile() {
     let fetchPromise;
 
-      fetchPromise = this.graph(`
+    fetchPromise = this.graph(`
       {
         user {
           memberships {
@@ -47,11 +49,11 @@ export default class OrganizationsView extends React.Component {
       }
       `)()
       .then(res => {
-      this.setState({ user: res.user });
-    })
-    .catch(error => {
-      console.error(error);
-    });
+        this.setState({ user: res.user });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   componentDidMount() {
@@ -79,19 +81,27 @@ export default class OrganizationsView extends React.Component {
           render={props =>
             <Row>
               <Col sm="12">
-                <Button color="primary" size="sm">
+                <Link className="btn btn-sm btn-primary" to={`${match.url}/create`}>
                   <i className="fa fa-plus mr-1"></i>
                   Create New Organization
-              </Button>
+              </Link>
                 <UserMemberships user={user}></UserMemberships>
               </Col>
             </Row>
-          } />
+          }
+        />
 
-        <Route
-          path={match.url + '/:id'}
-          component={ManageOrganizationView}
+        <Switch>
+          <Route
+            path={match.url + '/create'}
+            component={CreateOrganizationView}
           />
+
+          <Route
+            path={match.url + '/:id'}
+            component={ManageOrganizationView}
+          />
+        </Switch>
       </section>
     );
   }

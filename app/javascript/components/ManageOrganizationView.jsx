@@ -11,6 +11,8 @@ import {
   Link
 } from 'react-router-dom'
 
+import OrganizationInvitation from './OrganizationInvitation';
+
 export default class ManageOrganizationView extends React.Component {
   state = {
     organization: null
@@ -27,7 +29,7 @@ export default class ManageOrganizationView extends React.Component {
 
   fetchOrganization(orgId) {
     let fetchPromise;
-    
+
     if (orgId != null) {
       fetchPromise = this.graph(`
       {
@@ -45,7 +47,7 @@ export default class ManageOrganizationView extends React.Component {
         }
       }
       `)()
-      .then(res => res.organization);
+        .then(res => res.organization);
     } else {
       fetchPromise = Promise.resolve({});
     }
@@ -53,9 +55,9 @@ export default class ManageOrganizationView extends React.Component {
     fetchPromise.then(organization => {
       this.setState({ organization });
     })
-    .catch(error => {
-      console.error(error);
-    });
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   componentDidMount() {
@@ -66,9 +68,22 @@ export default class ManageOrganizationView extends React.Component {
     this.fetchOrganization(nextProps.match.params['id']);
   }
 
+  handleDelete = () => {
+    if (confirm("Are you sure you want to delete this organization? This action is not reversible")) {
+      this.setState({ deleting: true });
+
+      axios.delete(`api/v1/organizations/${this.props.match.params['id']}`)
+        .then(res => this.props.history.push(`./`))
+        .catch(err => console.log(err))
+        .finally(() => this.setState({ deleting: false }));
+    }
+  }
+
   render() {
     const {
-      organization
+      organization,
+      deleting,
+      saving
     } = this.state;
 
     const {
@@ -77,15 +92,65 @@ export default class ManageOrganizationView extends React.Component {
 
     return (
       <div>
-        <h2>{organization && organization.name}</h2>
-        <Row>
+        <h2 className="mb-4">{organization && organization.name}</h2>
+        <Row className="mb-2">
           <Col>
             <Link to="/organizations" className="btn btn-sm btn-light">
               <i className="fa fa-arrow-left mr-1"></i>
               Back to Organizations
             </Link>
+            <button className="btn btn-sm btn-danger" disabled={deleting || saving} onClick={this.handleDelete}>
+              <i className="fa fa-trash mr-1"></i>
+              {deleting ? <span>Deleting... <i className="fa fa-spin fa-spinner"></i></span> : 'Delete'}
+            </button>
           </Col>
         </Row>
+        <Row className="mb-2">
+          <Col>
+            <h3>Organization Logo</h3>
+          </Col>
+        </Row>
+        {organization &&
+          <Row className="mb-2">
+            <Col>
+              <h3>Organization Members</h3>
+              <div>
+                <OrganizationInvitation organizationId={parseInt(match.params['id'])} />
+              </div>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {organization.memberships.map((membership, ndx) => (
+                    <tr key={ndx}>
+                      <td className="font-weight-bold">
+                        {membership.user.email}
+                      </td>
+                      <td className="font-weight-bold">
+                      {membership.user.last_name}, {membership.user.first_name}
+                      </td>
+                      <td>
+                        {membership.role}
+                      </td>
+                      <td>
+                        <Button color="danger" size="sm">
+                          <i className="fa fa-sign-out mr-1"></i>
+                          Remove
+                </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Col>
+          </Row>
+        }
       </div>
     );
   }

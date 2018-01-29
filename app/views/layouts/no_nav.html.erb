@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Account</title>
-    <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
-  </head>
+<head>
+  <title>Account</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body class="no-nav">
+<body class="no-nav">
+  <% if notice %>
+    <div class="alert alert-primary">
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger">
+      <%= alert %>
+    </div>
+  <% end %>
 
-            
-      <% if notice %>
-        <div class="alert alert-primary"><%= notice %></div>
-      <% end %>
-      <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-      <% end %>
-      
+  <div class="app-wrapper">
     <%= yield %>
+  </div>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </body>
+  <script src="/js/mdb.min.js"></script>
+</body>
+
 </html>
