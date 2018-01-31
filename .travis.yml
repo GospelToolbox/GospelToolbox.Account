@@ -1,1 +1,5 @@
 language: ruby
+env: 
+  - RAILS_ENV=test
+before_script:
+  - "rake db:migrate"
