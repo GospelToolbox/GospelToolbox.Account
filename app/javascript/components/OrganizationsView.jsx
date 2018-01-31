@@ -10,7 +10,7 @@ import {
   Route,
   Switch,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 import UserMemberships from './UserMemberships';
 import ManageOrganizationView from './ManageOrganizationView';
@@ -27,7 +27,7 @@ export default class OrganizationsView extends React.Component {
 
     this.graph = graph('/graphql', {
       headers: {
-        'X-CSRF-Token': $("meta[name=csrf-token]").attr("content"),
+        'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
       }
     });
   }
@@ -48,10 +48,10 @@ export default class OrganizationsView extends React.Component {
         }
       }
       `)()
-      .then(res => {
+      .then((res) => {
         this.setState({ user: res.user });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
@@ -79,26 +79,26 @@ export default class OrganizationsView extends React.Component {
           exact
           path={match.url}
           render={props =>
-            <Row>
+            (<Row>
               <Col sm="12">
                 <Link className="btn btn-sm btn-primary" to={`${match.url}/create`}>
-                  <i className="fa fa-plus mr-1"></i>
+                  <i className="fa fa-plus mr-1" />
                   Create New Organization
-              </Link>
-                <UserMemberships user={user}></UserMemberships>
+                </Link>
+                <UserMemberships user={user} />
               </Col>
-            </Row>
+             </Row>)
           }
         />
 
         <Switch>
           <Route
-            path={match.url + '/create'}
+            path={`${match.url}/create`}
             component={CreateOrganizationView}
           />
 
           <Route
-            path={match.url + '/:id'}
+            path={`${match.url}/:id`}
             component={ManageOrganizationView}
           />
         </Switch>

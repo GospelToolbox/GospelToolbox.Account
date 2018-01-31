@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {
   Row,
-  Col,
+  Col
 } from 'reactstrap';
 
 import ProfileForm from './ProfileForm';
@@ -13,22 +13,22 @@ export default class ProfileView extends React.Component {
     saving: false
   }
 
-  fetchProfile() {
-    axios.get(`api/v1/profile.json`)
-      .then(response => {
-        this.setState({ profile: response.data });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
   componentDidMount() {
     this.fetchProfile();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.fetchProfile();
+  }
+
+  fetchProfile() {
+    axios.get('api/v1/profile.json')
+      .then((response) => {
+        this.setState({ profile: response.data });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   handleSaveProfile = (model) => {
@@ -48,13 +48,13 @@ export default class ProfileView extends React.Component {
         <Row>
           <Col sm="12">
             <h1>Welcome, {profile.email}!</h1>
-            <p>You're signed in and ready to use some apps.</p>
+            <p>You&#39;re signed in and ready to use some apps.</p>
           </Col>
         </Row>
         {profile &&
           <Row>
             <Col>
-              <ProfileForm model={profile} saving={saving} onSave={this.handleSaveProfile}></ProfileForm>
+              <ProfileForm model={profile} saving={saving} onSave={this.handleSaveProfile} />
             </Col>
           </Row>
         }

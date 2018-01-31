@@ -9,10 +9,9 @@ import {
 import {
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 export default class CreateOrganizationView extends React.Component {
-
   state = {
     name: null
   }
@@ -33,7 +32,7 @@ export default class CreateOrganizationView extends React.Component {
     event.preventDefault();
 
     this.setState({ saving: true });
-    axios.post(`api/v1/organizations`, {
+    axios.post('api/v1/organizations', {
       name: this.state.name
     })
       .then(res => this.props.history.push(`./${res.data.id}`))
@@ -62,14 +61,14 @@ export default class CreateOrganizationView extends React.Component {
                   name="name"
                   className="form-control"
                   type="text"
-                  value={name || ""}
+                  value={name || ''}
                   onChange={this.handleInputChanged}
                 />
                 <label htmlFor="name">Organization Name</label>
               </div>
 
               <button className="btn btn-primary" type="submit" disabled={saving}>
-                {saving ? <span><i className="fa fa-spin fa-spinner mr-1"></i> Saving...</span> : 'Create'}
+                {saving ? <span><i className="fa fa-spin fa-spinner mr-1" /> Saving...</span> : 'Create'}
               </button>
             </form>
           </Col>
