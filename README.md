@@ -1,24 +1,5 @@
-# README
+# Gospel Toolbox | Account
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build Status](https://travis-ci.org/GospelToolbox/Account.svg?branch=master)](https://travis-ci.org/GospelToolbox/Account)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The Account app is the single sign-on identity provider for all Gospel Toolbox applications.
