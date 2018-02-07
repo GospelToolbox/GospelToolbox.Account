@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20180128004026) do
 
-  create_table "authentication_providers", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "authentication_providers", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180128004026) do
 
   create_table "invitations", force: :cascade do |t|
     t.string "token"
-    t.integer "organization_id"
+    t.bigint "organization_id"
     t.string "role"
     t.string "email"
     t.datetime "created_at", null: false
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20180128004026) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer "organization_id"
-    t.integer "user_id"
+    t.bigint "organization_id"
+    t.bigint "user_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 20180128004026) do
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer "resource_owner_id", null: false
-    t.integer "application_id", null: false
+    t.bigint "application_id", null: false
     t.string "token", null: false
     t.integer "expires_in", null: false
     t.text "redirect_uri", null: false
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20180128004026) do
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer "resource_owner_id"
-    t.integer "application_id"
+    t.bigint "application_id"
     t.string "token", null: false
     t.string "refresh_token"
     t.integer "expires_in"
@@ -87,7 +90,7 @@ ActiveRecord::Schema.define(version: 20180128004026) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_authentications", force: :cascade do |t|
+  create_table "user_authentications", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "authentication_provider_id"
     t.string "uid"
@@ -128,4 +131,7 @@ ActiveRecord::Schema.define(version: 20180128004026) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "invitations", "organizations"
+  add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
+  add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
