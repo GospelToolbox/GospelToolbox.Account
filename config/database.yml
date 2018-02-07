@@ -8,12 +8,14 @@ default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  user: postgres
+  host: <%= ENV.fetch('app_database_host') { 'localhost' } %>
+  ost: <%= ENV.fetch('app_database_port') { 5432 } %>
+  user: <%= ENV.fetch('app_database_user') { 'postgres' } %>
   password: <%= ENV.fetch('app_database_password') { 'example' } %>
 
 development:
   <<: *default
-  database: gtbox_production
+  database: gtbox_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,4 +26,4 @@ test:
 
 production:
   <<: *default
-  database: gtbox_account
+  database: <%= ENV.fetch('app_database_name') { 'gtbox_prod' } %>
