@@ -14,11 +14,13 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
-gem "react-rails"
+gem 'react-rails'
 
 gem 'graphql'
+
+gem 'pundit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

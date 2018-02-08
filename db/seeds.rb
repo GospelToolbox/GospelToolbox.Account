@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+AuthenticationProvider.create(name: 'facebook')
+AuthenticationProvider.create(name: 'twitter')
+AuthenticationProvider.create(name: 'google_oauth2')
