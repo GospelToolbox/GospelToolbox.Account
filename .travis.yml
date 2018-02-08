@@ -6,4 +6,4 @@ before_script:
   - "rake db:migrate"
 
 services:
-  - postgres
+  - postgresql
