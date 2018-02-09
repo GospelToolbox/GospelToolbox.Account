@@ -65,7 +65,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 
   # Static analysis 
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
 end
 
 group :development do
