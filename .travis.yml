@@ -2,7 +2,7 @@ language: ruby
 env: 
   - RAILS_ENV=test
 before_script:
-  - psql -c 'create database gtbox_test;' -U postgres
+  - psql -c 'create database gtbox_account_test;' -U postgres
   - "rake db:migrate"
 
 services:
