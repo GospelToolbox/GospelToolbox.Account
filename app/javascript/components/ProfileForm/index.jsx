@@ -80,7 +80,7 @@ export default class ProfileForm extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col sm="12" md="6">
+          <Col xs="12" md="6">
             <div className="md-form">
               <input 
                 className="form-control" 
@@ -98,7 +98,7 @@ export default class ProfileForm extends React.Component {
 
             </div>
           </Col>
-          <Col sm="12" md="6">
+          <Col xs="12" md="6">
             <div className="md-form">
               <input className="form-control" name="last_name" type="text"
                 value={model.last_name || ""}

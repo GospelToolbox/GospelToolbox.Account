@@ -2,10 +2,11 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width">
   <title>Account</title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body class="no-nav">
@@ -13,18 +14,18 @@
     <div class="alert alert-primary">
       <%= notice.html_safe %>
     </div>
-  <% end %>
-  <% if alert %>
-    <div class="alert alert-danger">
-      <%= alert.html_safe %>
-    </div>
-  <% end %>
+    <% end %>
+      <% if alert %>
+        <div class="alert alert-danger">
+          <%= alert.html_safe %>
+        </div>
+        <% end %>
 
-  <div class="app-wrapper">
-    <%= yield %>
-  </div>
+          <div class="app-wrapper">
+            <%= yield %>
+          </div>
 
-  <script src="/js/mdb.min.js"></script>
+          <script src="/js/mdb.min.js"></script>
 </body>
 
 </html>
