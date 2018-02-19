@@ -15,9 +15,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
 gem 'font-awesome-rails'
-
 gem 'react-rails'
-
 gem 'graphql'
 
 gem 'pundit'
