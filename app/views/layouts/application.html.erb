@@ -2,11 +2,10 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width">
-    <title>Account</title>
+  <meta name="viewport" content="width=device-width">
+  <title>Account</title>
   <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application' %>
 </head>
@@ -43,11 +42,14 @@
               <%= link_to('Register', new_user_registration_path, class: 'nav-link')  %>
             </li>
             <% end %>
-            <li>
-                <a href="https://github.com/GospelToolbox/Account" title="Source Code" target="_blank">
-                  <img src="/img/GitHub-Mark-Light-64px.png" style="height: 30px">
-                </a>
-              </li>
+
+      </ul>
+      <ul class="navbar-nav nav-border-left">
+        <li>
+          <a href="https://github.com/GospelToolbox/Account" title="Source Code" target="_blank" class="link-github">
+            <img src="/img/GitHub-Mark-Light-64px.png">
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -57,6 +59,7 @@
       <%= notice %>
     </div>
     <% end %>
+
       <% if alert %>
         <div class="alert alert-danger">
           <%= alert %>
@@ -69,17 +72,20 @@
 
           <script src="/js/mdb.min.js"></script>
 
-        <% if ENV.has_key? 'google_analytics_id' %>
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+          <% if ENV.has_key? 'google_analytics_id' %>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
 
-          gtag('config', '<%=ENV["google_analytics_id"]%>');
-        </script>
-        <% end %>
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+
+              gtag('config', '<%=ENV["google_analytics_id"]%>');
+            </script>
+            <% end %>
 </body>
 
 </html>

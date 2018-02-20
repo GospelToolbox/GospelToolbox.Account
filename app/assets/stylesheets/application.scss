@@ -17,12 +17,27 @@
 
 @import "bootstrap/scss/bootstrap";
 @import "mdbootstrap/css/mdb";
+
 body.application {
   padding-top: 3.6rem;
 }
 
 body.no-nav {
   background-color: #01579b;
+}
+
+.nav-border-left {
+  border-left: darken($primary, 20%) 3px solid;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.link-github {
+  line-height: 30px;
+  
+  img {
+    height: 20px;
+  }
 }
 
 .app-wrapper {
