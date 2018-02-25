@@ -258,7 +258,6 @@ Devise.setup do |config|
   config.omniauth :twitter, ENV['twitter_client_id'], ENV['twitter_client_secret']
   config.omniauth :google_oauth2, ENV['google_client_id'], ENV['google_client_secret']
 
-
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

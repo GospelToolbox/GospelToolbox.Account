@@ -28,3 +28,4 @@
 
 runServer.cmd
 runtests.cmd
+.env

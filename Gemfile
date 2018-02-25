@@ -5,23 +5,28 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'devise'
-gem 'omniauth'
 gem 'bcrypt', '3.1.11', platforms: [:ruby]
+
+gem 'devise'
 gem 'doorkeeper'
 
+gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
 
 gem 'font-awesome-rails'
-gem 'react-rails'
+
 gem 'graphql'
 
 gem 'pundit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5.rc1'
+gem 'react-rails'
+
+gem 'rack-cors'
+
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.0'
 # Use Puma as the app server
@@ -60,6 +65,7 @@ group :development, :test do
 
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem 'dotenv-rails'
   gem 'selenium-webdriver'
 
   # Static analysis 

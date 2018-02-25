@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         post 'invite', on: :member
       end
 
-      resource :profile, only: :show
+      get 'profile', to: 'profile#show'
     end
   end
 
