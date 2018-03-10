@@ -66,3 +66,28 @@ body.no-nav {
   background-color: #dd4b39;
   color: #fff !important;
 }
+
+p.separator {
+  position: relative;
+  margin: 1em 0;
+  text-align: center;
+  color: #b3b3b3;
+
+  span {
+    background-color: #fff;
+    padding: 0 1em;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #e6e6e6;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+}

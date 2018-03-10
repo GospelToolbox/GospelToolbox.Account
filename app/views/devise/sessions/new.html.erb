@@ -6,22 +6,29 @@
       <div class="card">
 
         <div class="card-body">
-          <h2>Log in</h2>
+          <h2>Sign In</h2>
 
           <div class="row my-3 d-flex justify-content-center">
             <!--Facebook-->
             <a class="btn btn-facebook btn-rounded mr-md-3 z-depth-1a" href="<%=url_for omniauth_authorize_path(resource_name, :facebook) %>">
-              <i class="fa fa-facebook text-center"></i>
+              <i class="fa fa-facebook mr-1"></i>
+              Facebook
             </a>
             <!--Twitter-->
             <a class="btn btn-twitter btn-rounded mr-md-3 z-depth-1a" href="<%=url_for omniauth_authorize_path(resource_name, :twitter) %>">
-              <i class="fa fa-twitter text-center"></i>
+              <i class="fa fa-twitter mr-1"></i>
+              Twitter
             </a>
             <!--Google +-->
             <a class="btn btn-google btn-rounded z-depth-1a" href="<%=url_for omniauth_authorize_path(resource_name, :google_oauth2) %>">
-              <i class="fa fa-google-plus"></i>
+              <i class="fa fa-google-plus mr-1"></i>
+              Google
             </a>
           </div>
+
+          <p class="separator">
+            <span>or</span>
+          </p>
 
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="md-form">
@@ -38,9 +45,9 @@
 
             <% if devise_mapping.rememberable? -%>
               <div class="form-group">
-                <%= f.submit "Log in", class: 'btn btn-primary' %>
+                <%= f.submit "Sign in", class: 'btn btn-primary' %>
                   <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me %>
+                    <%= f.label :remember_me, 'Keep me signed in' %>
 
               </div>
 
@@ -51,12 +58,10 @@
                 </div>
                 <% end %>
 
-                  <hr>
-                  <p>
-                    <%= link_to "Forgot your password?", new_password_path(resource_name) %>
-                      <br> I need to
-                      <%= link_to "Sign Up", new_registration_path(resource_name) %>
-                  </p>
+                  <div>
+                    <span class="pull-right"><%= link_to "Forgot your password?", new_password_path(resource_name) %></span>
+                      <%= link_to "Not a member? Sign Up", new_registration_path(resource_name) %>
+                  </div>
         </div>
       </div>
     </div>
