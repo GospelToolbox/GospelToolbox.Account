@@ -6,8 +6,8 @@ Doorkeeper.configure do
     if current_user
       current_user
     else
-      session[:user_return_to] = request.fullpath
-      redirect_to(new_user_session_url)
+      session[:user_final_redirect] = request.original_url
+      redirect_to new_user_session_url
     end
   end
 
@@ -16,7 +16,7 @@ Doorkeeper.configure do
     if current_user.admin?
       current_user
     else
-      redirect_to(new_user_session_url)
+      redirect_to new_user_session_url
     end
   end
 
