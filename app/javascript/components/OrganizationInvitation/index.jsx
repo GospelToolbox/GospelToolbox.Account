@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { number } from 'prop-types'
+import { number } from 'prop-types';
 import {
   Button,
   Modal,
@@ -10,28 +10,26 @@ import {
 } from 'reactstrap';
 
 export default class OrganizationInvitation extends React.Component {
+  static propTypes = {
+    organizationId: number.isRequired
+  }
+
+  static defaultProps = { }
+
   state = {
     modalOpen: false,
     email: null,
     sending: false
   }
 
-  static propTypes = {
-    organizationId: number.isRequired
-  }
-
-  static defaultProps = {
-    organizationId: null
-  }
-
   toggleModal = () => {
     this.setState(state => ({ modalOpen: !state.modalOpen }));
   }
 
-  sendInvitation = () => {
+  sendInvitation = (event) => {
     event.preventDefault();
 
-    this.setState({ sending: true, })
+    this.setState({ sending: true });
 
     axios.post(`api/v1/organizations/${this.props.organizationId}/invite`, {
       email: this.state.email
@@ -46,9 +44,9 @@ export default class OrganizationInvitation extends React.Component {
   handleInputChanged = (event) => {
     event.preventDefault();
 
-    const target = event.target;
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const { name } = target;
 
     this.setState({
       [name]: value
@@ -65,24 +63,24 @@ export default class OrganizationInvitation extends React.Component {
     return (
       <div>
         <button className="btn btn-sm btn-primary" onClick={this.toggleModal}>
-          <i className="fa fa-address-book-o mr-1"></i>
+          <i className="fa fa-address-book-o mr-1" />
           Invite User
-                </button>
+        </button>
         <Modal isOpen={modalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Invite User to Organization</ModalHeader>
           <ModalBody>
-            <div className="md-form">
-              <input type="email" name="email" value={email || ''} onChange={this.handleInputChanged} className="form-control" />
+            <div className="form-group">
               <label htmlFor="email">Email to invite</label>
+              <input type="email" name="email" value={email || ''} onChange={this.handleInputChanged} className="form-control" />
             </div>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.sendInvitation} disabled={sending}>
-              {sending ? <span>Sending... <i className="fa fa-spin fa-spinner"></i></span> : 'Send Invitation'}
+              {sending ? <span>Sending... <i className="fa fa-spin fa-spinner" /></span> : 'Send Invitation'}
             </Button>
           </ModalFooter>
         </Modal>
       </div>
-    )
+    );
   }
 }

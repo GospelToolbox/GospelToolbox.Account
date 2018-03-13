@@ -6,15 +6,14 @@
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= devise_error_messages! %>
 
-        <div class="md-form">
+        <div class="form-group">
+          <%= f.label :email %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-            <%= f.label :email %>
         </div>
 
         <div>
           <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
-            <%= link_to "Back to Login", new_user_session_path, class: "btn btn-outline-primary" %>
-
+          <%= link_to "Back to Login", new_user_session_path, class: "btn btn-outline-primary" %>
         </div>
       <% end %>
     </div>

@@ -1,10 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import graph from 'graphql.js';
+import $ from 'jquery';
 import {
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap';
 import {
   Route,
@@ -17,11 +16,6 @@ import ManageOrganizationView from './ManageOrganizationView';
 import CreateOrganizationView from './CreateOrganizationView';
 
 export default class OrganizationsView extends React.Component {
-  state = {
-    user: {},
-    saving: false
-  }
-
   constructor(props) {
     super(props);
 
@@ -32,10 +26,20 @@ export default class OrganizationsView extends React.Component {
     });
   }
 
-  fetchProfile() {
-    let fetchPromise;
+  state = {
+    user: {}
+  }
 
-    fetchPromise = this.graph(`
+  componentDidMount() {
+    this.fetchProfile();
+  }
+
+  componentWillReceiveProps() {
+    this.fetchProfile();
+  }
+
+  fetchProfile() {
+    this.graph(`
       {
         user {
           memberships {
@@ -56,14 +60,6 @@ export default class OrganizationsView extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.fetchProfile();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.fetchProfile();
-  }
-
   render() {
     const {
       user
@@ -78,16 +74,19 @@ export default class OrganizationsView extends React.Component {
         <Route
           exact
           path={match.url}
-          render={props =>
-            (<Row>
+          render={() => (
+            <Row>
               <Col sm="12">
-                <Link className="btn btn-sm btn-primary" to={`${match.url}/create`}>
-                  <i className="fa fa-plus mr-1" />
-                  Create New Organization
-                </Link>
+                <div className="mb-4">
+                  <Link className="btn btn-sm btn-primary" to={`${match.url}/create`}>
+                    <i className="fa fa-plus mr-1" />
+                    Create New Organization
+                  </Link>
+                </div>
                 <UserMemberships user={user} />
               </Col>
-             </Row>)
+            </Row>
+            )
           }
         />
 

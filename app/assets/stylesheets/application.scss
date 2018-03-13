@@ -15,15 +15,20 @@
  *= require font-awesome
  */
 
+ $primary: #01579b;
+
+$border-radius:               0;
+$border-radius-lg:            0;
+$border-radius-sm:            0;
+
 @import "bootstrap/scss/bootstrap";
-@import "mdbootstrap/css/mdb";
 
 body.application {
   padding-top: 3.6rem;
 }
 
 body.no-nav {
-  background-color: #01579b;
+  background-color: $primary;
 }
 
 .nav-border-left {

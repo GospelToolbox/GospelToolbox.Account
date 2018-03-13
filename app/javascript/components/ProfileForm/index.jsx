@@ -4,16 +4,10 @@ import {
   Col,
   Button
 } from 'reactstrap';
-import { func, object, bool } from 'prop-types'
+import { func, object, bool } from 'prop-types';
 import update from 'immutability-helper';
 
-
 export default class ProfileForm extends React.Component {
-
-  state = {
-    model: {}
-  }
-
   static propTypes = {
     model: object.isRequired,
     onSave: func,
@@ -21,11 +15,12 @@ export default class ProfileForm extends React.Component {
   }
 
   static defaultProps = {
-    model: {
-      id: 0
-    },
     onSave: () => { },
     saving: false
+  }
+
+  state = {
+    model: {}
   }
 
   componentDidMount() {
@@ -36,18 +31,14 @@ export default class ProfileForm extends React.Component {
     this.setState({ model: nextProps.model });
   }
 
-  labelClass(input) {
-    return (input != null && input !== '') ? 'active' : '';
-  }
-
   handleInputChanged = (event) => {
     event.preventDefault();
 
-    const target = event.target;
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const { name } = target;
 
-    this.setState((previousState) => update(previousState, {
+    this.setState(previousState => update(previousState, {
       model:
         {
           [name]: { $set: value }
@@ -55,13 +46,12 @@ export default class ProfileForm extends React.Component {
     }));
   }
 
-  handleSave = (event) => {
+  handleSave = () => {
     this.props.onSave(this.state.model);
   }
 
   render() {
     const {
-      onSave,
       saving
     } = this.props;
 
@@ -74,46 +64,46 @@ export default class ProfileForm extends React.Component {
         <Row>
           <Col>
             <div className="md-form">
+              <label htmlFor="email">Email</label>
               <div style={{ padding: '0.5em 0', fontWeight: 'bold' }}>{model.email}</div>
-              <label className={this.labelClass(model.email)} htmlFor="email">Email</label>
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs="12" md="6">
-            <div className="md-form">
-              <input 
-                className="form-control" 
-                name="first_name" 
-                type="text"
-                value={model.first_name || ""}
-                onChange={this.handleInputChanged}
-              />
-              <label 
-                htmlFor="first_name"
-                className={this.labelClass(model.first_name)}
-              >
+            <div className="form-group">
+              <label htmlFor="first_name">
                 First Name
               </label>
-
+              <input
+                className="form-control"
+                name="first_name"
+                type="text"
+                value={model.first_name || ''}
+                onChange={this.handleInputChanged}
+              />
             </div>
           </Col>
           <Col xs="12" md="6">
-            <div className="md-form">
-              <input className="form-control" name="last_name" type="text"
-                value={model.last_name || ""}
-                onChange={this.handleInputChanged} />
-              <label htmlFor="last_name" className={this.labelClass(model.last_name)}>Last Name</label>
+            <div className="form-group">
+              <label htmlFor="last_name">Last Name</label>
+              <input
+                className="form-control"
+                name="last_name"
+                type="text"
+                value={model.last_name || ''}
+                onChange={this.handleInputChanged}
+              />
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
             <Button color="primary" disabled={saving} onClick={this.handleSave}>
-              {saving ? <span><i className="fa fa-spin fa-spinner mr-1"></i> Saving...</span> : 'Save'}
+              {saving ? <span><i className="fa fa-spin fa-spinner mr-1" /> Saving...</span> : 'Save'}
             </Button>
             <br />
-            <a  href="/users/edit">
+            <a href="/users/edit">
               Change email, password, or cancel account
             </a>
           </Col>

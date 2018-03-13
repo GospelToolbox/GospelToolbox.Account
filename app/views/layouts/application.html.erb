@@ -70,8 +70,6 @@
             <%= yield %>
           </div>
 
-          <script src="/js/mdb.min.js"></script>
-
           <% if ENV.has_key? 'google_analytics_id' %>
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
