@@ -8,12 +8,12 @@
     <img src="/img/LogoWhiteSm.png" height="30" alt=""> Gospel Toolbox | Account
   </a>
 
-  <ul class="navbar-nav nav-border-left mr-auto">
-    <%= active_link_to 'Profile', root_path, active: :exclusive, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
-    <%= active_link_to 'Organizations', organizations_path, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
-  </ul>
-
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav nav-border-left mr-auto">
+      <%= active_link_to 'Profile', root_path, active: :exclusive, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
+        <%= active_link_to 'Organizations', organizations_path, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
+    </ul>
+
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
