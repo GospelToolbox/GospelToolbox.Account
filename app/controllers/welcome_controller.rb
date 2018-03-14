@@ -14,6 +14,5 @@ class WelcomeController < ApplicationController
     invitation.destroy
 
     redirect_to root_url
-
   end
 end

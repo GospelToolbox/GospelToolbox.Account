@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'active_link_to'
+
 gem 'bcrypt', '3.1.11', platforms: [:ruby]
 
 gem 'devise'

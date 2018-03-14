@@ -8,7 +8,8 @@ import {
 import {
   Route,
   Switch,
-  Link
+  Link,
+  HashRouter as Router
 } from 'react-router-dom';
 
 import UserMemberships from './UserMemberships';
@@ -70,38 +71,40 @@ export default class OrganizationsView extends React.Component {
     } = this.props;
 
     return (
-      <section>
-        <Route
-          exact
-          path={match.url}
-          render={() => (
-            <Row>
-              <Col sm="12">
-                <div className="mb-4">
-                  <Link className="btn btn-sm btn-primary" to={`${match.url}/create`}>
-                    <i className="fa fa-plus mr-1" />
-                    Create New Organization
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Row>
+                <Col sm="12">
+                  <div className="mb-4">
+                    <Link className="btn btn-sm btn-primary" to="/create">
+                      <i className="fa fa-plus mr-1" />
+                      Create New Organization
                   </Link>
-                </div>
-                <UserMemberships user={user} />
-              </Col>
-            </Row>
+                  </div>
+                  <UserMemberships user={user} />
+                </Col>
+              </Row>
             )
-          }
-        />
-
-        <Switch>
-          <Route
-            path={`${match.url}/create`}
-            component={CreateOrganizationView}
+            }
           />
 
-          <Route
-            path={`${match.url}/:id`}
-            component={ManageOrganizationView}
-          />
-        </Switch>
-      </section>
+          <Switch>
+            <Route
+              path="/create"
+              component={CreateOrganizationView}
+            />
+
+            <Route
+              path="/:id"
+              component={ManageOrganizationView}
+            />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
   use_doorkeeper
-  get 'welcome/index'
 
   devise_scope :user do
     get '/invitation', to: "welcome#accept_invitation"
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     confirmations: 'users/confirmations'
   }
+
+  resources :organizations
 
   namespace :api do
     namespace :v1 do
@@ -28,6 +29,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'welcome#index'
+  root 'profile#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

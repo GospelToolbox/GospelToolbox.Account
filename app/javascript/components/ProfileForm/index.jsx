@@ -102,10 +102,6 @@ export default class ProfileForm extends React.Component {
             <Button color="primary" disabled={saving} onClick={this.handleSave}>
               {saving ? <span><i className="fa fa-spin fa-spinner mr-1" /> Saving...</span> : 'Save'}
             </Button>
-            <br />
-            <a href="/users/edit">
-              Change email, password, or cancel account
-            </a>
           </Col>
         </Row>
       </div>

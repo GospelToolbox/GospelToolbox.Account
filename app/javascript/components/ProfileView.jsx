@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import {
   Row,
-  Col
+  Col,
+  Card,
+  CardBody
 } from 'reactstrap';
 
 import ProfileForm from './ProfileForm';
@@ -45,16 +47,42 @@ export default class ProfileView extends React.Component {
     } = this.state;
     return (
       <section>
-        <Row>
-          <Col sm="12">
-            <h1>Welcome, {profile.email}!</h1>
-            <p>You&#39;re signed in and ready to use some apps.</p>
-          </Col>
-        </Row>
         {profile &&
           <Row>
-            <Col>
-              <ProfileForm model={profile} saving={saving} onSave={this.handleSaveProfile} />
+            <Col xs="12" md="3">
+              <Card>
+                <CardBody>
+                  <div className="profile-img">
+                    <img src="/assets/profile.png" alt="profile" />
+                    </div>
+                  <div className="text-center">
+                    {profile.first_name} {profile.last_name}
+                  </div>
+                  <div className="profile-usermenu">
+                    <ul className="nav flex-column">
+                      <li className="nav-item active">
+                        <a href="#">
+                          <i className="fa fa-user mr-2" />
+                          Overview 
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a href="/users/edit">
+                          <i className="fa fa-gear mr-2" />
+                          Account Settings 
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col xs="12" md="9">
+              <Card>
+                <CardBody>
+                  <ProfileForm model={profile} saving={saving} onSave={this.handleSaveProfile} />
+                </CardBody>
+              </Card>
             </Col>
           </Row>
         }
