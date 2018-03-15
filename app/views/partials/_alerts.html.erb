@@ -1,11 +1,11 @@
 <% if notice %>
 <div class="alert alert-primary">
-  <%= notice %>
+  <%= notice.html_safe %>
 </div>
 <% end %>
 
 <% if alert %>
 <div class="alert alert-danger">
-  <%= alert %>
+  <%= alert.html_safe %>
 </div>
 <% end %>

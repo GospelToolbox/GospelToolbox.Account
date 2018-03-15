@@ -7,7 +7,9 @@ import {
   CardBody
 } from 'reactstrap';
 
+import profileImage from 'images/profile.png';
 import ProfileForm from './ProfileForm';
+
 
 export default class ProfileView extends React.Component {
   state = {
@@ -53,8 +55,8 @@ export default class ProfileView extends React.Component {
               <Card>
                 <CardBody>
                   <div className="profile-img">
-                    <img src="/assets/profile.png" alt="profile" />
-                    </div>
+                    <img src={profileImage} alt="profile" />
+                  </div>
                   <div className="text-center">
                     {profile.first_name} {profile.last_name}
                   </div>
@@ -63,13 +65,13 @@ export default class ProfileView extends React.Component {
                       <li className="nav-item active">
                         <a href="#">
                           <i className="fa fa-user mr-2" />
-                          Overview 
+                          Overview
                         </a>
                       </li>
                       <li className="nav-item">
                         <a href="/users/edit">
                           <i className="fa fa-gear mr-2" />
-                          Account Settings 
+                          Account Settings
                         </a>
                       </li>
                     </ul>

@@ -5,14 +5,16 @@
   </button>
 
   <a class="navbar-brand" href="<%= url_for root_path%>">
-    <img src="/img/LogoWhiteSm.png" height="30" alt=""> Gospel Toolbox | Account
+    <img src="<%= asset_path 'LogoWhiteSm.png' %>" height="30" alt=""> Gospel Toolbox | Account
   </a>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav nav-border-left mr-auto">
-      <%= active_link_to 'Profile', root_path, active: :exclusive, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
+    <% if user_signed_in? %>
+      <ul class="navbar-nav nav-border-left mr-auto">
+        <%= active_link_to 'Profile', root_path, active: :exclusive, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
         <%= active_link_to 'Organizations', organizations_path, wrap_tag: :li, wrap_class: 'nav-item', class: 'nav-link' %>
-    </ul>
+      </ul>
+    <% end %>
 
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
@@ -25,21 +27,21 @@
             <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>
           </div>
         </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to('Login', new_user_session_path, class: 'nav-link')  %>
-          </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to('Login', new_user_session_path, class: 'nav-link')  %>
+        </li>
 
-          <li class="nav-item">
-            <%= link_to('Register', new_user_registration_path, class: 'nav-link')  %>
-          </li>
-          <% end %>
+        <li class="nav-item">
+          <%= link_to('Register', new_user_registration_path, class: 'nav-link')  %>
+        </li>
+      <% end %>
 
     </ul>
     <ul class="navbar-nav nav-border-left hidden-sm-down">
       <li>
         <a href="https://github.com/GospelToolbox/Account" title="Source Code" target="_blank" class="link-github">
-          <img src="/img/GitHub-Mark-Light-64px.png">
+          <img src="<%= asset_path 'GitHub-Mark-Light-64px.png' %>">
         </a>
       </li>
     </ul>

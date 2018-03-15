@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom';
 import $ from 'jquery';
 
+import profileImage from 'images/organization.png';
 import OrganizationInvitation from './OrganizationInvitation';
 
 export default class ManageOrganizationView extends React.Component {
@@ -114,7 +115,7 @@ export default class ManageOrganizationView extends React.Component {
                 <Card>
                   <CardBody>
                     <div className="profile-img">
-                      <img src="/assets/organization.png" alt="profile" />
+                      <img src={profileImage} alt="profile" />
                     </div>
                     <div className="text-center">
                       {organization.name}
@@ -143,7 +144,7 @@ export default class ManageOrganizationView extends React.Component {
                   <CardBody>
                     <div>
                       <h3>Organization Members</h3>
-                      <div>
+                      <div className="mb-3">
                         <OrganizationInvitation organizationId={parseInt(match.params.id)} />
                       </div>
                       <table className="table">

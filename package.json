@@ -6,6 +6,7 @@
     "axios": "^0.17.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "4.0.0",
+    "file-loader": "^1.1.11",
     "graphql.js": "^0.4.20",
     "immutability-helper": "^2.6.4",
     "jquery": "^3.3.1",
