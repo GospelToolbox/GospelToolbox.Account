@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def app_version
-    @app_version ||= `git show --pretty=%H`[0...8]
+    @app_version ||= (ENV['HEROKU_SLUG_COMMIT'] || `git show --pretty=%H`)[0...8]
   end
 end
