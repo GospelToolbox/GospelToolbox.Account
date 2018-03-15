@@ -141,3 +141,12 @@ p.separator {
     }
   }
 }
+
+.diagnostic-info {
+  padding: 2px;
+  font-size: 0.8em;
+  color: #888;
+  position:absolute;
+  bottom:0;
+  right: 0;
+}
