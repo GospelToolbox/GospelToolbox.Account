@@ -10,5 +10,4 @@ Types::MembershipType = GraphQL::ObjectType.define do
   field :organization, Types::OrganizationType do
     resolve -> (obj, args, ctx) { obj.organization }
   end
-
 end

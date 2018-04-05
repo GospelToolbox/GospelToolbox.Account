@@ -8,5 +8,4 @@ Types::OrganizationType = GraphQL::ObjectType.define do
   field :memberships, !types[Types::MembershipType] do
     resolve -> (obj, args, ctx) { obj.memberships }
   end
-
 end
