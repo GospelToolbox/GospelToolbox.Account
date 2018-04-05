@@ -14,7 +14,7 @@ services:
     links:
       - db:db
     volumes:
-      - ..:/src/big-earl
+      - ..:/src/gospeltoolbox/account
     links:
       - db:db
 
