@@ -12,10 +12,11 @@ RUN apt-get update -y && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
     
 RUN apt-get update -y && \
-    apt-get install -y \
+    DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     build-essential \
     ruby2.5 ruby2.5-dev \
     libpq-dev \
+    zlib1g-dev \
     unattended-upgrades \
     git \
     update-notifier-common \
