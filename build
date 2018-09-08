@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+docker build --tag gospeltoolbox/account:$branch .
