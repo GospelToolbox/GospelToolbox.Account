@@ -9,3 +9,6 @@ public/packs/
 public/packs-test/
 
 *.env
+
+build
+publish
