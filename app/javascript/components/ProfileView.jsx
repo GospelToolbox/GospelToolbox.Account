@@ -70,7 +70,7 @@ export default class ProfileView extends React.Component {
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a href="/users/edit">
+                        <a href={`${pathRoot}/users/edit`}>
                           <i className="fa fa-gear mr-2" />
                           Account Settings
                         </a>
