@@ -8,7 +8,7 @@ CMD=$1
 case "$CMD" in
   'start' )
     echo `pwd`
-    rm -f /data/src/tmp/pids/server.pid
+    rm -f /src/gospeltoolbox/account/tmp/pids/server.pid
     rails s -b 0.0.0.0
     ;;
 

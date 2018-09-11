@@ -9,6 +9,8 @@ import {
   ModalFooter
 } from 'reactstrap';
 
+const pathRoot = process.env.RAILS_RELATIVE_URL_ROOT;
+
 export default class OrganizationInvitation extends React.Component {
   static propTypes = {
     organizationId: number.isRequired
@@ -31,7 +33,7 @@ export default class OrganizationInvitation extends React.Component {
 
     this.setState({ sending: true });
 
-    axios.post(`api/v1/organizations/${this.props.organizationId}/invite`, {
+    axios.post(`${pathRoot}/api/v1/organizations/${this.props.organizationId}/invite`, {
       email: this.state.email
     })
       .catch(err => console.log(err))

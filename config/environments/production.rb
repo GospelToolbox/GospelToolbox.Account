@@ -104,4 +104,11 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  asset_host = ENV['SITE_HOST']
+  asset_host += ENV['APP_SUBURI'] if ENV['APP_SUBURI'].present?
+  config.action_controller.asset_host = asset_host
+  config.action_mailer.default_url_options = {
+      :host => ENV['SITE_HOST'] 
+  }
 end

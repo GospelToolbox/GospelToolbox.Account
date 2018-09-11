@@ -11,6 +11,8 @@ import {
   Link
 } from 'react-router-dom';
 
+const pathRoot = process.env.RAILS_RELATIVE_URL_ROOT;
+
 export default class CreateOrganizationView extends React.Component {
   state = {
     name: null
@@ -32,7 +34,7 @@ export default class CreateOrganizationView extends React.Component {
     event.preventDefault();
 
     this.setState({ saving: true });
-    axios.post('api/v1/organizations', {
+    axios.post(`${pathRoot}/api/v1/organizations`, {
       name: this.state.name
     })
       .then(res => this.props.history.push(`./${res.data.id}`))

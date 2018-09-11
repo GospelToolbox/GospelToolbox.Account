@@ -17,11 +17,13 @@ import $ from 'jquery';
 import profileImage from 'images/organization.png';
 import OrganizationInvitation from './OrganizationInvitation';
 
+const pathRoot = process.env.RAILS_RELATIVE_URL_ROOT;
+
 export default class ManageOrganizationView extends React.Component {
   constructor(props) {
     super(props);
 
-    this.graph = graph('/graphql', {
+    this.graph = graph(`${pathRoot}/graphql`, {
       headers: {
         'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
       }
@@ -79,7 +81,7 @@ export default class ManageOrganizationView extends React.Component {
 
       console.log(this.props);
 
-      axios.delete(`api/v1/organizations/${this.props.match.params.id}`)
+      axios.delete(`${pathRoot}/api/v1/organizations/${this.props.match.params.id}`)
         .then(() => this.props.history.push('./'))
         .catch(err => console.log(err))
         .finally(() => this.setState({ deleting: false }));

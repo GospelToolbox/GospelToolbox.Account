@@ -10,6 +10,7 @@ import {
 import profileImage from 'images/profile.png';
 import ProfileForm from './ProfileForm';
 
+const pathRoot = process.env.RAILS_RELATIVE_URL_ROOT;
 
 export default class ProfileView extends React.Component {
   state = {
@@ -26,7 +27,7 @@ export default class ProfileView extends React.Component {
   }
 
   fetchProfile() {
-    axios.get('api/v1/profile.json')
+    axios.get(`${pathRoot}/api/v1/profile.json`)
       .then((response) => {
         this.setState({ profile: response.data });
       })
@@ -37,7 +38,7 @@ export default class ProfileView extends React.Component {
 
   handleSaveProfile = (model) => {
     this.setState({ saving: true });
-    axios.put(`api/v1/users/${model.id}`, model)
+    axios.put(`${pathRoot}/api/v1/users/${model.id}`, model)
       .then(() => this.fetchProfile())
       .finally(() => this.setState({ saving: false }));
   }
