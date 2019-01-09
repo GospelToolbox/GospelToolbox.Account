@@ -1,3 +1,5 @@
+APP_SUB_URI = nil
+
 #App sub uri for rails app
 if ENV['APP_SUBURI'].present?
   APP_SUB_URI = ENV['APP_SUBURI']
@@ -9,5 +11,5 @@ end
 
 #if Puma Server
 if ENV['PASSENGER'].blank?
-  Account::Application.config.relative_url_root = APP_SUB_URI
+  Account::Application.config.relative_url_root = APP_SUB_URI if APP_SUB_URI.present?
 end
