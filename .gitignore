@@ -30,3 +30,4 @@
 runServer.cmd
 runtests.cmd
 .env
+.DS_Store
