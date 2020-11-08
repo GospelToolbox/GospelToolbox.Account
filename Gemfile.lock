@@ -78,7 +78,7 @@ GEM
       warden (~> 1.2.3)
     docile (1.3.2)
     domp (0.0.7)
-    doorkeeper (5.4.0)
+    doorkeeper (5.1.2)
       railties (>= 5)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
@@ -266,7 +266,7 @@ DEPENDENCIES
   coveralls
   devise
   domp
-  doorkeeper
+  doorkeeper (~> 5.1.2)
   dotenv-rails
   font-awesome-rails
   graphiql-rails

@@ -11,7 +11,7 @@ gem 'active_link_to'
 gem 'bcrypt', '3.1.11', platforms: [:ruby]
 
 gem 'devise'
-gem 'doorkeeper'
+gem 'doorkeeper', '~> 5.1.2'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
