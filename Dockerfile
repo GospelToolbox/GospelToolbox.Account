@@ -14,7 +14,7 @@ RUN apt-get update -y && \
 RUN apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     build-essential \
-    ruby2.5 ruby2.5-dev \
+    ruby2.7 ruby2.7-dev \
     libpq-dev \
     zlib1g-dev \
     unattended-upgrades \
