@@ -10,7 +10,7 @@ gem 'active_link_to'
 
 gem 'bcrypt', '3.1.11', platforms: [:ruby]
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'doorkeeper', '~> 5.1.2'
 
 gem 'omniauth'
