@@ -83,3 +83,5 @@ group :development do
   gem 'domp'
 end
 
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
